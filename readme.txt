@@ -9,7 +9,7 @@ Booking system for WordPress. Bookings made easy! Easy to configure and customiz
 
 == Description ==
 
-WP Booking System is a simple booking system for WordPress. You’ll be up and running in just a few minutes. Start receiving bookings from your visitors today! You can create booking calendars and forms, and you can manage your bookings. You can easily customize the booking system to fit your needs!
+WP Booking System is a simple booking system for WordPress. You will be up and running in just a few minutes. Start receiving bookings from your visitors today! You can create booking calendars and forms, and you can manage your bookings. You can easily customize the booking system to fit your needs!
 
 Download the Premium version at: http://www.wpsimplebookingcalendar.com.
 
