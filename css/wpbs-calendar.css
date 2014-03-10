@@ -5,7 +5,7 @@
 div.wpbs-calendar {width:250px; *width:232px; height:280px; *height:261px; padding:10px 7px 7px 10px !important; position:relative; border: 1px solid #cccccc; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; background-color:#ffffff; float:left; margin-left:10px; margin-bottom:10px; }
 div.wpbs-calendar:first-child {margin-left:0;}
 
-div.wpbs-calendar div.wpbs-heading {height:29px; width:228px; border-bottom:1px solid #000; color:#000000; font-size:0px; text-align:center;}
+div.wpbs-calendar div.wpbs-heading {height:29px; width:228px; border-bottom:1px solid #000; color:#000000; font-size:0px; text-align:center; float:left;}
 div.wpbs-calendar div.wpbs-heading span {font-size:14px; color:#000000; line-height:18px;}
 div.wpbs-calendar div.wpbs-heading a {display:block; width:20px; height:19px; color:#000000;}
 div.wpbs-calendar div.wpbs-heading a img {margin:0; padding:0; border:0; vertical-align: top;}
@@ -71,7 +71,7 @@ div.wpbs-select-container .hasCustomSelect_wpbs {margin-left:1px;}
 
 
 /***** Form *****/
-.wpbs-form-form {width:100%; float:none !important; margin:0 !important; padding:10px 0 0 0 !important; background-color:#ffffff !important;}
+.wpbs-form-form {width:100%; float:none !important; margin:0 !important; padding:10px 0 0 0 !important;}
 
 .wpbs-form-form label, .wpbs-form-form p {float:none !important; margin:0 !important; padding:0 !important; display:block !important; color:#000000 !important; font-size:14px !important; line-height:30px !important; font-weight:bold !important;}
 

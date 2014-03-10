@@ -45,10 +45,10 @@ function wpbs_print_legend($legend,$language,$hideLegend = true){
     foreach(json_decode($legend,true) as $key => $value ):
         if(!(!empty($value['hide']) && $value['hide'] == 'hide') || $hideLegend == false){
            if(!empty($value['name'][$language])) $legendName = $value['name'][$language]; else $legendName = $value['name']['default'];
-            echo '<span class="wpbs-legend-item"><span class="wpbs-legend-color status-' . $key . '">
-                    <span class="wpbs-day-split-top wpbs-day-split-top-'.$key.'"></span>
-                    <span class="wpbs-day-split-bottom wpbs-day-split-bottom-'.$key.'"></span>    
-                </span><p>' . $legendName . '</p></span>'; 
+            echo '<div class="wpbs-legend-item"><div class="wpbs-legend-color status-' . $key . '">
+                    <div class="wpbs-day-split-top wpbs-day-split-top-'.$key.'"></div>
+                    <div class="wpbs-day-split-bottom wpbs-day-split-bottom-'.$key.'"></div>    
+                </div><p>' . $legendName . '</p></div>'; 
         }
         
     endforeach;

@@ -3,7 +3,7 @@ Contributors: veribo
 Tags: booking system, booking calendar, booking engine, booking, system, calendar, engine, bookings, bookable, reservation calendar, reservations, scheduling, schedule, rooms, hotel, holiday home, accommodations, dateblocker, date blocker, bed and breakfast
 Requires at least: 3.0
 Tested up to: 3.8.1
-Stable tag: 0.1
+Stable tag: 0.2
 
 Booking system for WordPress. Bookings made easy! Easy to configure and customize.
 
@@ -47,11 +47,17 @@ Please see http://www.wpbookingsystem.com for more information and ask your ques
 
 == Changelog ==
 
+= 0.2 =
+* Small CSS fixes
+
 = 0.1 =
 * First release
 
 
 == Upgrade Notice ==
+
+= 0.2 =
+* Small CSS fixes
 
 = 0.1 =
 * First release
