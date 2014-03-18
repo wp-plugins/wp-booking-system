@@ -37,6 +37,20 @@ function wpbs_calendar($options = array()){
         
     }
     
+    if($showDateEditor != true){
+        $calendarData = json_decode($calendarData,true);
+        foreach($calendarData as $year => $months){
+            foreach($months as $month => $days){
+                foreach($days as $day => $status){
+                    if (strpos($day,'description') !== false) {
+                        unset( $calendarData[$year][$month][$day] );
+                    }
+                }
+            }
+        }
+        $calendarData = json_encode($calendarData);
+    }
+    
     echo "<div class='wpbs-clear'></div>";
     
     echo '<div class="wpbs-calendar-options">';
