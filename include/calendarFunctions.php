@@ -1,34 +1,34 @@
 <?php
 function wpbs_print_legend_css($legend, $calendarID = null, $hoverCSS = true){
-    echo "<style>";
+    $output = "<style>";
     foreach(json_decode($legend,true) as $key => $value ){
         if(!empty($value["splitColor"])){
             
-            echo ".wpbs-calendar-".$calendarID." .wpbs-day-split-top-" . $key . " {border-color: " . $value['color'] ." transparent transparent transparent; _border-color: " . $value['color'] ." #000000 #000000 #000000;}";
-            echo ".wpbs-calendar-".$calendarID." .wpbs-day-split-bottom-" . $key . " {border-color: transparent transparent " . $value['splitColor'] ." transparent; _border-color:  #000000 #000000 " . $value['splitColor'] ." #000000;}";
+            $output .= ".wpbs-calendar-".$calendarID." .wpbs-day-split-top-" . $key . " {border-color: " . $value['color'] ." transparent transparent transparent; _border-color: " . $value['color'] ." #000000 #000000 #000000;}";
+            $output .= ".wpbs-calendar-".$calendarID." .wpbs-day-split-bottom-" . $key . " {border-color: transparent transparent " . $value['splitColor'] ." transparent; _border-color:  #000000 #000000 " . $value['splitColor'] ." #000000;}";
         } else {
-            echo ".wpbs-calendar-".$calendarID." .status-" . $key . " {background-color: " . $value['color'] ."}";
-            echo ".wpbs-calendar-".$calendarID." .wpbs-day-split-top-" . $key . " {display:none;} ";
-            echo ".wpbs-calendar-".$calendarID." .wpbs-day-split-bottom-" . $key . " {display:none;} ";
+            $output .= ".wpbs-calendar-".$calendarID." .status-" . $key . " {background-color: " . $value['color'] ."}";
+            $output .= ".wpbs-calendar-".$calendarID." .wpbs-day-split-top-" . $key . " {display:none;} ";
+            $output .= ".wpbs-calendar-".$calendarID." .wpbs-day-split-bottom-" . $key . " {display:none;} ";
         }
     }
     
     $wpbsOptions = json_decode(get_option('wpbs-options'),true);
     
-    echo ".status-wpbs-grey-out-history {background-color:".$wpbsOptions['historyColor']."}";
-    echo ".status-wpbs-grey-out-history .wpbs-day-split-top, .status-wpbs-grey-out-history .wpbs-day-split-bottom {display:none;}";
+    $output .= ".status-wpbs-grey-out-history {background-color:".$wpbsOptions['historyColor']."}";
+    $output .= ".status-wpbs-grey-out-history .wpbs-day-split-top, .status-wpbs-grey-out-history .wpbs-day-split-bottom {display:none;}";
     
     if($hoverCSS == true):
     
-        echo "li.wpbs-bookable:hover, li.wpbs-bookable-clicked, li.wpbs-bookable-clicked:hover, li.wpbs-bookable-hover, li.wpbs-bookable-hover:hover {height:28px !important; width:28px !important; border: 1px solid ".$wpbsOptions['selectedBorder']." !important; background:".$wpbsOptions['selectedColor']." !important; cursor:pointer; line-height:28px !important; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; color:#fff !important; }";
-        echo "li.wpbs-bookable:hover span {color:#fff !important;}";
-        echo "li.wpbs-bookable-hover span.wpbs-day-split-bottom, li.wpbs-bookable-hover span.wpbs-day-split-top, li.wpbs-bookable-hover:hover span.wpbs-day-split-bottom, li.wpbs-bookable-hover:hover span.wpbs-day-split-top, li.wpbs-bookable:hover span.wpbs-day-split-top, li.wpbs-bookable:hover span.wpbs-day-split-bottom {display:none !important;}";
-        echo "li.wpbs-bookable-clicked span, li.wpbs-bookable-clicked:hover span, li.wpbs-bookable-hover span, li.wpbs-bookable-hover:hover span {color:#ffffff !important;  }";
-        echo "li.wpbs-bookable-clicked .wpbs-day-split-top, li.wpbs-bookable-clicked:hover .wpbs-day-split-top, li.wpbs-bookable-hover .wpbs-day-split-top, li.wpbs-bookable-hover:hover .wpbs-day-split-top {border-color:".$wpbsOptions['selectedColor']." !important;}";
-        echo "li.wpbs-bookable-clicked .wpbs-day-split-bottom, li.wpbs-bookable-clicked:hover .wpbs-day-split-bottom, li.wpbs-bookable-hover .wpbs-day-split-bottom, li.wpbs-bookable-hover:hover .wpbs-day-split-bottom {border-color:".$wpbsOptions['selectedColor']." !important;}";
+        $output .= "li.wpbs-bookable:hover, li.wpbs-bookable-clicked, li.wpbs-bookable-clicked:hover, li.wpbs-bookable-hover, li.wpbs-bookable-hover:hover {height:28px !important; width:28px !important; border: 1px solid ".$wpbsOptions['selectedBorder']." !important; background:".$wpbsOptions['selectedColor']." !important; cursor:pointer; line-height:28px !important; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; color:#fff !important; }";
+        $output .= "li.wpbs-bookable:hover span {color:#fff !important;}";
+        $output .= "li.wpbs-bookable-hover span.wpbs-day-split-bottom, li.wpbs-bookable-hover span.wpbs-day-split-top, li.wpbs-bookable-hover:hover span.wpbs-day-split-bottom, li.wpbs-bookable-hover:hover span.wpbs-day-split-top, li.wpbs-bookable:hover span.wpbs-day-split-top, li.wpbs-bookable:hover span.wpbs-day-split-bottom {display:none !important;}";
+        $output .= "li.wpbs-bookable-clicked span, li.wpbs-bookable-clicked:hover span, li.wpbs-bookable-hover span, li.wpbs-bookable-hover:hover span {color:#ffffff !important;  }";
+        $output .= "li.wpbs-bookable-clicked .wpbs-day-split-top, li.wpbs-bookable-clicked:hover .wpbs-day-split-top, li.wpbs-bookable-hover .wpbs-day-split-top, li.wpbs-bookable-hover:hover .wpbs-day-split-top {border-color:".$wpbsOptions['selectedColor']." !important;}";
+        $output .= "li.wpbs-bookable-clicked .wpbs-day-split-bottom, li.wpbs-bookable-clicked:hover .wpbs-day-split-bottom, li.wpbs-bookable-hover .wpbs-day-split-bottom, li.wpbs-bookable-hover:hover .wpbs-day-split-bottom {border-color:".$wpbsOptions['selectedColor']." !important;}";
     endif;
-    echo "</style>";
-    
+    $output .= "</style>";
+    return $output;
 }
 
 function wpbs_timeFormat($timestamp){
@@ -41,17 +41,18 @@ function wpbs_defaultCalendarLegend(){
 }
 
 function wpbs_print_legend($legend,$language,$hideLegend = true){
-
+    $output = '';
     foreach(json_decode($legend,true) as $key => $value ):
         if(!(!empty($value['hide']) && $value['hide'] == 'hide') || $hideLegend == false){
            if(!empty($value['name'][$language])) $legendName = $value['name'][$language]; else $legendName = $value['name']['default'];
-            echo '<div class="wpbs-legend-item"><div class="wpbs-legend-color status-' . $key . '">
+            $output .= '<div class="wpbs-legend-item"><div class="wpbs-legend-color status-' . $key . '">
                     <div class="wpbs-day-split-top wpbs-day-split-top-'.$key.'"></div>
                     <div class="wpbs-day-split-bottom wpbs-day-split-bottom-'.$key.'"></div>    
                 </div><p>' . $legendName . '</p></div>'; 
         }
         
     endforeach;
+    return $output; 
 }
 function wpbs_get_admin_language(){
     $activeLanguages = json_decode(get_option('wpbs-languages'),true);

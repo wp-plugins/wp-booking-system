@@ -17,7 +17,7 @@
     
         <?php if($_GET['id'] == 'wpbs-new-calendar') {$calendar['calendarLegend'] = wpbs_defaultCalendarLegend(); $calendar['calendarData'] = '{}';}?>
         <div class="postbox-container meta-box-sortables">
-            <?php wpbs_print_legend_css($calendar['calendarLegend'],(!empty($calendar['calendarID'])) ? $calendar['calendarID'] : "", false); ?>
+            <?php echo wpbs_print_legend_css($calendar['calendarLegend'],(!empty($calendar['calendarID'])) ? $calendar['calendarID'] : "", false); ?>
             <form action="<?php echo admin_url( 'admin.php?page=wp-booking-system&do=save-calendar&noheader=true');?>" method="post">
             <div class="wpbs-buttons-wrapper">
                 <input type="submit" class="button button-primary button-h2 saveCalendar" value="Save Changes" />
@@ -42,7 +42,7 @@
                     <div class="inside">  
                          
                                              
-                            <?php wpbs_calendar( array( 'showDateEditor' => true, 'calendarData' => $calendar['calendarData'], 'calendarLegend' => $calendar['calendarLegend'], 'calendarID' => (!empty($calendar['calendarID'])) ? $calendar['calendarID'] : "" ) );?>
+                            <?php echo  wpbs_calendar( array( 'showDateEditor' => true, 'calendarData' => $calendar['calendarData'], 'calendarLegend' => $calendar['calendarLegend'], 'calendarID' => (!empty($calendar['calendarID'])) ? $calendar['calendarID'] : "" ) );?>
                             <input type="hidden" value="<?php echo (!empty($calendar['calendarID'])) ? $calendar['calendarID'] : "" ;?>" name="calendarID" />   
                             
                                           

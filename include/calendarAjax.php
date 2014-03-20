@@ -36,7 +36,7 @@ function changeDay_callback() {
     }
 
 
-    wpbs_calendar(array('ajaxCall' => true, 'calendarLanguage' => $calendarLanguage, 'calendarHistory' => $calendarHistory, 'showDateEditor' => $showDateEditor, 'calendarID' => $calendarID, 'calendarData' => stripslashes($calendarData), 'currentTimestamp' => $currentTimestamp, 'showDropdown' => $showDropdown, 'totalCalendars' => $totalCalendars, 'firstDayOfWeek' => $firstDayOfWeek, 'calendarLegend' => stripslashes($calendarLegend), 'calendarSelection' => $calendarSelection));
+    echo wpbs_calendar(array('ajaxCall' => true, 'calendarLanguage' => $calendarLanguage, 'calendarHistory' => $calendarHistory, 'showDateEditor' => $showDateEditor, 'calendarID' => $calendarID, 'calendarData' => stripslashes($calendarData), 'currentTimestamp' => $currentTimestamp, 'showDropdown' => $showDropdown, 'totalCalendars' => $totalCalendars, 'firstDayOfWeek' => $firstDayOfWeek, 'calendarLegend' => stripslashes($calendarLegend), 'calendarSelection' => $calendarSelection));
     
 	die(); 
 }

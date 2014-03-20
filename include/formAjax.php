@@ -43,7 +43,7 @@ function wpbs_submitForm_callback() {
     endif;
     
     if($submitForm != true){
-        wpbs_display_form($formID,esc_html($_POST['wpbs-form-language']),$error,esc_html($_POST['wpbs-form-calendar-ID']));
+        echo wpbs_display_form($formID,esc_html($_POST['wpbs-form-language']),$error,esc_html($_POST['wpbs-form-calendar-ID']));
     } else {
         $formOptions = json_decode($form['formOptions'],true);
         echo "<p>".$formOptions['confirmationMessage']."</p>";
@@ -51,7 +51,7 @@ function wpbs_submitForm_callback() {
         //prepare form data
         if($wpdb->num_rows > 0): 
             foreach(json_decode($form['formData'],true) as $field):
-                $bookingData[$field['fieldName']] = $_POST['wpbs-field-' . $field['fieldId']];
+                @$bookingData[$field['fieldName']] = $_POST['wpbs-field-' . $field['fieldId']];
             endforeach;
         endif;
         //insert data into db

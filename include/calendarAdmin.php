@@ -28,50 +28,50 @@ function wpbs_edit_dates($options){
         $startDate = $_POST['startDate'];
         $endDate = $_POST['endDate'];
         
-        echo "<div class='edit-dates-popup'>";
-            echo "<h3>".date('F Y',$startDate)."</h3>";
-            echo '<div class="wpbs-dates-editor wp-dates-editor-popup"><ul>';
+        $output = "<div class='edit-dates-popup'>";
+            $output .= "<h3>".date('F Y',$startDate)."</h3>";
+            $output .= '<div class="wpbs-dates-editor wp-dates-editor-popup"><ul>';
             
             $currentMonth = date('F',$startDate);
             for($i=$startDate;$i<=$endDate;$i=$i + 60*60*24):
                 if($currentMonth != date('F',$i)){
                     $currentMonth = date('F',$i);
-                    echo "</ul></div><div class='wpbs-clear'></div><h3>".date('F Y',$i)."</h3><div class='wpbs-dates-editor'><ul>";
+                    $output .= "</ul></div><div class='wpbs-clear'></div><h3>".date('F Y',$i)."</h3><div class='wpbs-dates-editor'><ul>";
                 }
-                wpbs_edit_date($calendarData,$calendarLegend,date('j',$i),$i,$calendarLanguage);
+                $output .= wpbs_edit_date($calendarData,$calendarLegend,date('j',$i),$i,$calendarLanguage);
             endfor;
-            echo "</ul></div>";   
-        echo "</div>";
+            $output .= "</ul></div>";   
+        $output .= "</div>";
         
-        echo "<div class='bulk-edit-dates-popup'>";
-            echo "<h3>Bulk Edit Dates</h3>";
-            echo "<div class='bulk-edit-dates-popup-container'>";
-                echo '<select class="bulk-edit-legend-select">';
+        $output .= "<div class='bulk-edit-dates-popup'>";
+            $output .= "<h3>Bulk Edit Dates</h3>";
+            $output .= "<div class='bulk-edit-dates-popup-container'>";
+                $output .= '<select class="bulk-edit-legend-select">';
                 foreach(json_decode($calendarLegend,true) as $key => $value ): $selected = null;
-                    if(!empty($value['name'][$language])) $legendName = $value['name'][$language]; else $legendName = $value['name']['default'];
+                    if(!empty($value['name'][$calendarLanguage])) $legendName = $value['name'][$calendarLanguage]; else $legendName = $value['name']['default'];
                     if(!empty($status) && $status == $key) $selected = ' selected="selected"';
-                    echo '<option class="wpbs-option-'.$key.'" value="' . $key . '"' . $selected . '>' . $legendName . '</option>';
+                    $output .= '<option class="wpbs-option-'.$key.'" value="' . $key . '"' . $selected . '>' . $legendName . '</option>';
                 endforeach;
-                echo "</select>";
+                $output .= "</select>";
                 
-                echo "<input type='text' class='bulk-edit-legend-text'>";
+                $output .= "<input type='text' class='bulk-edit-legend-text'>";
                 
-                echo "<input type='button' class='button button-secondary bulk-edit-legend-apply' value='Apply Changes' />";
-            echo "</div>";
-        echo "</div>";
+                $output .= "<input type='button' class='button button-secondary bulk-edit-legend-apply' value='Apply Changes' />";
+            $output .= "</div>";
+        $output .= "</div>";
         
     } else {
-        echo '<div class="wpbs-dates-editor"><ul>';
+        $output = '<div class="wpbs-dates-editor"><ul>';
         for($i=1;$i<=date('t',$currentTimestamp);$i++):
-            wpbs_edit_date($calendarData,$calendarLegend,$i,$currentTimestamp,$calendarLanguage);
+            $output .= wpbs_edit_date($calendarData,$calendarLegend,$i,$currentTimestamp,$calendarLanguage);
         endfor;
-        echo "</ul></div>";     
-        echo "<input type='hidden' name='wpbsCalendarData' id='inputCalendarData' value='".$calendarData."' />";
-        echo "<input type='hidden' id='wpbs_booking_action' name='wpbs_booking_action' />";
-        echo "<input type='hidden' id='wpbs_booking_id' name='wpbs_booking_id' />";   
+        $output .= "</ul></div>";     
+        $output .= "<input type='hidden' name='wpbsCalendarData' id='inputCalendarData' value='".$calendarData."' />";
+        $output .= "<input type='hidden' id='wpbs_booking_action' name='wpbs_booking_action' />";
+        $output .= "<input type='hidden' id='wpbs_booking_id' name='wpbs_booking_id' />";   
     }
     
-    
+    return $output;
     
     
 }
@@ -85,34 +85,39 @@ function wpbs_edit_date($calendarData,$legend,$day,$timestamp,$language){
     if(!empty($calendarData[gmdate('Y',$timestamp)][gmdate('n',$timestamp)]["description-" . $day]))
         $description = $calendarData[gmdate('Y',$timestamp)][gmdate('n',$timestamp)]["description-" . $day]; 
         
-    echo '<li>';
-        echo '<span class="wpbs-select-status status-'.$status.'">';
-            echo '<span class="wpbs-day-split-top wpbs-day-split-top-'.$status.'"></span>';
-            echo '<span class="wpbs-day-split-bottom wpbs-day-split-bottom-'.$status.'"></span>';    
-            echo '<span class="wpbs-day-split-day">'.$day.'</span>';
-        echo '</span>';
+    $output = '<li>';
+        $output .= '<span class="wpbs-select-status status-'.$status.'">';
+            $output .= '<span class="wpbs-day-split-top wpbs-day-split-top-'.$status.'"></span>';
+            $output .= '<span class="wpbs-day-split-bottom wpbs-day-split-bottom-'.$status.'"></span>';    
+            $output .= '<span class="wpbs-day-split-day">'.$day.'</span>';
+        $output .= '</span>';
         
-        echo '<select class="wpbs-day-select wpbs-day-'.$day.'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.gmdate('Y',$timestamp).'" data-month="wpbs-month-'.gmdate('n',$timestamp).'">';
+        $output .= '<select class="wpbs-day-select wpbs-day-'.$day.'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.gmdate('Y',$timestamp).'" data-month="wpbs-month-'.gmdate('n',$timestamp).'">';
         foreach(json_decode($legend,true) as $key => $value ): $selected = null;
             if(!empty($value['name'][$language])) $legendName = $value['name'][$language]; else $legendName = $value['name']['default'];
             if(!empty($status) && $status == $key) $selected = ' selected="selected"';
-            echo '<option class="wpbs-option-'.$key.'" value="' . $key . '"' . $selected . '>' . $legendName . '</option>';
+            $output .= '<option class="wpbs-option-'.$key.'" value="' . $key . '"' . $selected . '>' . $legendName . '</option>';
         endforeach;
-        echo "</select>";
-        echo '<input class="wpbs-input-description" type="text" value="'. htmlentities(wpbs_replaceCustom(stripslashes($description)),ENT_QUOTES,'UTF-8').'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.gmdate('Y',$timestamp).'" data-month="wpbs-month-'.gmdate('n',$timestamp).'" />';
-    echo "</li>";
+        $output .= "</select>";
+        $output .= '<input class="wpbs-input-description" type="text" value="'. htmlentities(wpbs_replaceCustom(stripslashes($description)),ENT_QUOTES,'UTF-8').'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.gmdate('Y',$timestamp).'" data-month="wpbs-month-'.gmdate('n',$timestamp).'" />';
+    $output .= "</li>";
+    
+    return $output;
 }
 
 function wpbs_edit_legend($calendarLegend,$showEdit, $calendarID){
-    
+    ob_start();
     ?>
     <div class="wpbs-calendar-legend-container">
-        <?php wpbs_print_legend($calendarLegend,wpbs_get_admin_language(),false);?>
+        <?php echo wpbs_print_legend($calendarLegend,wpbs_get_admin_language(),false);?>
         <a class="button button-secondary" href="<?php echo admin_url( 'admin.php?page=wp-booking-system&do=full-version');?>">Edit Legend</a>
     </div>
     <?php
+    $output = ob_get_contents();
+    ob_clean();
+    return $output;
 }
 
 function wpbs_batch_update($calendarLegend){
-
+    return false;
 }

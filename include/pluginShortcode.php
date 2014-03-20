@@ -38,13 +38,11 @@ function wpbs_shortcode( $atts ) {
     $sql = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'bs_calendars WHERE calendarID=%d',$id);
     $calendar = $wpdb->get_row( $sql, ARRAY_A );
     if($wpdb->num_rows > 0):
-        ob_start();
-        wpbs_print_legend_css($calendar['calendarLegend'],$calendar['calendarID']);
-        if($title == 'yes') echo '<h2>' . $calendar['calendarTitle'] . "</h2>";
-        wpbs_calendar(array('ajaxCall' => false, 'calendarHistory' => $history, 'calendarID' => $calendar['calendarID'], 'formID' => $form, 'calendarData' => $calendar['calendarData'], 'totalCalendars' => $display, 'firstDayOfWeek' => $start, 'showDateEditor' => false, 'calendarLegend' => $calendar['calendarLegend'], 'showLegend' => $legend, 'calendarLanguage' => $language, 'currentTimestamp' => strtotime(date("F", mktime(0, 0, 0, $month, 15, date('Y'))) . " " . $year) ));
-        $calendarOutput = ob_get_contents();
-        ob_end_clean();
-        return $calendarOutput;
+
+        $output = wpbs_print_legend_css($calendar['calendarLegend'],$calendar['calendarID']);
+        if($title == 'yes') $output .= '<h2>' . $calendar['calendarTitle'] . "</h2>";
+        $output .= wpbs_calendar(array('ajaxCall' => false, 'calendarHistory' => $history, 'calendarID' => $calendar['calendarID'], 'formID' => $form, 'calendarData' => $calendar['calendarData'], 'totalCalendars' => $display, 'firstDayOfWeek' => $start, 'showDateEditor' => false, 'calendarLegend' => $calendar['calendarLegend'], 'showLegend' => $legend, 'calendarLanguage' => $language, 'currentTimestamp' => strtotime(date("F", mktime(0, 0, 0, $month, 15, date('Y'))) . " " . $year) ));
+        return $output;
     else:
         return 'WP Booking System: Invalid calendar ID.';
     endif;

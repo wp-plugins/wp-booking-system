@@ -13,30 +13,30 @@ function wpbs_display_form_field($field,$language,$error){
    
     
     
-    echo '<label class="wpbs-form-label';
-        echo (!empty($error['error'])) ? " wpbs-form-error" : "";
-    echo'" for="wpbs-field-'.$field['fieldId'].'">'. $fieldName;
-        echo ($field['fieldRequired'] == 1) ? "*" : "";
-    echo '</label>';
+    $output = '<label class="wpbs-form-label';
+        $output .= (!empty($error['error'])) ? " wpbs-form-error" : "";
+    $output .= '" for="wpbs-field-'.$field['fieldId'].'">'. $fieldName;
+        $output .= ($field['fieldRequired'] == 1) ? "*" : "";
+    $output .= '</label>';
         
     switch($field['fieldType']){
         case 'text':            
-            echo '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html($value).'" />';
+            $output .= '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html($value).'" />';
             break;
         case 'email':
-            echo '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html($value).'" />';
+            $output .= '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html($value).'" />';
             break;
         case 'textarea':
-            echo '<textarea class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'">'.esc_html($value).'</textarea>';
+            $output .= '<textarea class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'">'.esc_html($value).'</textarea>';
             break;
         case 'checkbox':
             $options = explode('|',$field['fieldOptions']);
             $i = 0; foreach(array_filter($options) as $option){
                 $checked = null;
                 if(!empty($value) && in_array(esc_html(trim($option)),$value)) $checked = 'checked="checked"';
-                echo '<label class="wpbs-form-label wpbs-form-label-checkbox" for="wpbs-field-'.$field['fieldId'].'-'.$i.'">';
-                    echo '<input '.$checked.' class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" value="'.esc_html(trim($option)).'" type="checkbox" name="wpbs-field-'.$field['fieldId'].'[]" id="wpbs-field-'.$field['fieldId'].'-'.$i.'" />';
-                echo esc_html(trim($option)).'</label>';
+                $output .= '<label class="wpbs-form-label wpbs-form-label-checkbox" for="wpbs-field-'.$field['fieldId'].'-'.$i.'">';
+                    $output .= '<input '.$checked.' class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" value="'.esc_html(trim($option)).'" type="checkbox" name="wpbs-field-'.$field['fieldId'].'[]" id="wpbs-field-'.$field['fieldId'].'-'.$i.'" />';
+                $output .= esc_html(trim($option)).'</label>';
                 $i++;
             }
 
@@ -48,64 +48,66 @@ function wpbs_display_form_field($field,$language,$error){
                 $checked = null;
                 if(esc_html(trim($option)) == $value) $checked = 'checked="checked"';
                 
-                echo '<label class="wpbs-form-label wpbs-form-label-radio" for="wpbs-field-'.$field['fieldId'].'-'.$i.'">';
-                    echo '<input '.$checked.' class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" value="'.esc_html(trim($option)).'" type="radio" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'-'.$i.'" />';
-                echo esc_html(trim($option)).'</label>';
+                $output .= '<label class="wpbs-form-label wpbs-form-label-radio" for="wpbs-field-'.$field['fieldId'].'-'.$i.'">';
+                    $output .= '<input '.$checked.' class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" value="'.esc_html(trim($option)).'" type="radio" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'-'.$i.'" />';
+                $output .= esc_html(trim($option)).'</label>';
                 $i++;
             }
             break;
         case 'dropdown':
-            echo '<select class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" >';
+            $output .= '<select class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" >';
             $options = explode('|',$field['fieldOptions']);
             foreach($options as $option){
                 $selected = null;
                 if($value == esc_html(trim($option))) $selected = 'selected="selected"';
-                echo '<option '.$selected.' value="'.esc_html(trim($option)).'">'.esc_html(trim($option)).'</option>';
+                $output .= '<option '.$selected.' value="'.esc_html(trim($option)).'">'.esc_html(trim($option)).'</option>';
             }
-            echo '</select>';
+            $output .= '</select>';
             break;
         default:
-            echo "Error: Invalid Field Type";
+            $output .= "Error: Invalid Field Type";
     }
+    return $output;
 }
 
 function wpbs_display_form($ID,$language = 'en',$errors = false, $calendarID){
     global $wpdb;
     $sql = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'bs_forms WHERE formID=%d',$ID);
     $form = $wpdb->get_row( $sql, ARRAY_A );
-
+    $output = '';
     if(!empty($errors['noDates']) && $errors['noDates'] == true){
-        echo '<div class="wpbs-form-item">';    
-            echo '<label class="wpbs-form-label wpbs-form-error">Please select a date range.</label>';
-        echo '</div>';
+        $output .= '<div class="wpbs-form-item">';    
+            $output .= '<label class="wpbs-form-label wpbs-form-error">Please select a date range.</label>';
+        $output .= '</div>';
     } 
     if($wpdb->num_rows > 0):
         $formOptions = json_decode($form['formOptions'],true);      
         
          
         foreach(json_decode($form['formData'],true) as $field):
-            echo '<div class="wpbs-form-item">';
+            $output .= '<div class="wpbs-form-item">';
                 $error = null; if(!empty($errors[$field['fieldId']])) $error = $errors[$field['fieldId']];
-                wpbs_display_form_field($field,$language,$error);
-            echo '</div>';
+                $output .= wpbs_display_form_field($field,$language,$error);
+            $output .= '</div>';
         endforeach;
-        echo '<input type="hidden" name="wpbs-form-id" value="'.$form["formID"].'" />';
-        echo '<input type="hidden" name="wpbs-form-calendar-ID" value="'.$calendarID.'" />';
-        echo '<input type="hidden" name="wpbs-form-language" value="'.$language.'" />';
-        echo '<input type="hidden" name="wpbs-form-start-date" class="wpbs-start-date" value="'.$errors['startDate'].'" />';
-        echo '<input type="hidden" name="wpbs-form-end-date" class="wpbs-end-date" value="'.$errors['endDate'].'" />';
-        echo '<div class="wpbs-form-item">';
+        $output .= '<input type="hidden" name="wpbs-form-id" value="'.$form["formID"].'" />';
+        $output .= '<input type="hidden" name="wpbs-form-calendar-ID" value="'.$calendarID.'" />';
+        $output .= '<input type="hidden" name="wpbs-form-language" value="'.$language.'" />';
+        $output .= '<input type="hidden" name="wpbs-form-start-date" class="wpbs-start-date" value="'.$errors['startDate'].'" />';
+        $output .= '<input type="hidden" name="wpbs-form-end-date" class="wpbs-end-date" value="'.$errors['endDate'].'" />';
+        $output .= '<div class="wpbs-form-item">';
             if(!empty($formOptions['submitLabel'][$language]))
                 $submitLabel = esc_html($formOptions['submitLabel'][$language]);
             else
                 $submitLabel = esc_html($formOptions['submitLabel']['default']);                
-            echo '<input type="button" name="wpbs-form-submit" value="'.$submitLabel.'" class="wpbs-form-submit" />';
-            echo '<div class="wpbs-form-loading"><img src="'.WPBS_PATH.'/images/ajax-loader.gif" /></div>';
-        echo '</div>';
-        
+            $output .= '<input type="button" name="wpbs-form-submit" value="'.$submitLabel.'" class="wpbs-form-submit" />';
+            $output .= '<div class="wpbs-form-loading"><img src="'.WPBS_PATH.'/images/ajax-loader.gif" /></div>';
+        $output .= '</div>';
+        return $output;
     else:
         return 'WP Booking System: Invalid form ID.';
     endif;
+    
 }
 function wpbs_edit_form($options = array()){
     $default_options = array('formData' => '{}');
