@@ -57,8 +57,8 @@ function wpbs_calendar($options = array()){
     $output .= '    <div class="wpbs-show-dropdown">' . $showDropdown . '</div>'; 
     $output .= '    <div class="wpbs-current-timestamp">' . $currentTimestamp . '</div>'; 
     $output .= '    <div class="wpbs-total-calendars">' . $totalCalendars . '</div>';
-    $output .= '    <div class="wpbs-calendar-data">' . html_entity_decode( $calendarData ) . '</div>';
-    $output .= '    <div class="wpbs-calendar-legend">' . html_entity_decode( $calendarLegend ) . '</div>';
+$output .= "    <div class='wpbs-calendar-data' data-info='".html_entity_decode( $calendarData )."'>".html_entity_decode( $calendarData )."</div>";
+    $output .= "    <div class='wpbs-calendar-legend' data-info='".html_entity_decode( $calendarLegend )."'>".html_entity_decode( $calendarLegend )."</div>";
     $output .= '    <div class="wpbs-calendar-history">' . $calendarHistory . '</div>';
     $output .= '    <div class="wpbs-calendar-language">' . $calendarLanguage . '</div>';
     $output .= '    <div class="wpbs-calendar-week-start">' . $firstDayOfWeek . '</div>';
