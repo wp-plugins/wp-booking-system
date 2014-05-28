@@ -79,11 +79,11 @@ function wpbs_edit_dates($options){
 function wpbs_edit_date($calendarData,$legend,$day,$timestamp,$language){
     $calendarData = json_decode($calendarData,true);
     $status = 'default';
-    if(!empty($calendarData[gmdate('Y',$timestamp)][gmdate('n',$timestamp)][$day]))
-        $status = $calendarData[gmdate('Y',$timestamp)][gmdate('n',$timestamp)][$day];
+    if(!empty($calendarData[date('Y',$timestamp)][date('n',$timestamp)][$day]))
+        $status = $calendarData[date('Y',$timestamp)][date('n',$timestamp)][$day];
     $description = '';   
-    if(!empty($calendarData[gmdate('Y',$timestamp)][gmdate('n',$timestamp)]["description-" . $day]))
-        $description = $calendarData[gmdate('Y',$timestamp)][gmdate('n',$timestamp)]["description-" . $day]; 
+    if(!empty($calendarData[date('Y',$timestamp)][date('n',$timestamp)]["description-" . $day]))
+        $description = $calendarData[date('Y',$timestamp)][date('n',$timestamp)]["description-" . $day]; 
         
     $output = '<li>';
         $output .= '<span class="wpbs-select-status status-'.$status.'">';
@@ -92,14 +92,14 @@ function wpbs_edit_date($calendarData,$legend,$day,$timestamp,$language){
             $output .= '<span class="wpbs-day-split-day">'.$day.'</span>';
         $output .= '</span>';
         
-        $output .= '<select class="wpbs-day-select wpbs-day-'.$day.'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.gmdate('Y',$timestamp).'" data-month="wpbs-month-'.gmdate('n',$timestamp).'">';
+        $output .= '<select class="wpbs-day-select wpbs-day-'.$day.'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.date('Y',$timestamp).'" data-month="wpbs-month-'.date('n',$timestamp).'">';
         foreach(json_decode($legend,true) as $key => $value ): $selected = null;
             if(!empty($value['name'][$language])) $legendName = $value['name'][$language]; else $legendName = $value['name']['default'];
             if(!empty($status) && $status == $key) $selected = ' selected="selected"';
             $output .= '<option class="wpbs-option-'.$key.'" value="' . $key . '"' . $selected . '>' . $legendName . '</option>';
         endforeach;
         $output .= "</select>";
-        $output .= '<input class="wpbs-input-description" type="text" value="'. htmlentities(wpbs_replaceCustom(stripslashes($description)),ENT_QUOTES,'UTF-8').'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.gmdate('Y',$timestamp).'" data-month="wpbs-month-'.gmdate('n',$timestamp).'" />';
+        $output .= '<input class="wpbs-input-description" type="text" value="'. htmlentities(wpbs_replaceCustom(stripslashes($description)),ENT_QUOTES,'UTF-8').'" data-name="wpbs-day-'.$day.'" data-year="wpbs-year-'.date('Y',$timestamp).'" data-month="wpbs-month-'.date('n',$timestamp).'" />';
     $output .= "</li>";
     
     return $output;

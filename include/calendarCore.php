@@ -4,7 +4,7 @@
  */
 function wpbs_calendar($options = array()){
     
-    $default_options = array('ajaxCall' => false, 'monthToShow' => null, 'yearToShow' => null, 'currentCalendar' => 1, 'totalCalendars' => 1 , 'firstDayOfWeek' => 1, 'showDropdown' => 1, 'calendarLanguage' => 'en', 'calendarData' => null, 'currentTimestamp' => mktime(0, 0, 0, gmdate('n') , 15, gmdate('Y')),'calendarLegend' => false, 'calendarID' => false, 'formID' => false, 'showDateEditor' => false, 'showLegend' => false, 'calendarSelection' => '', 'calendarHistory' => 1);
+    $default_options = array('ajaxCall' => false, 'monthToShow' => null, 'yearToShow' => null, 'currentCalendar' => 1, 'totalCalendars' => 1 , 'firstDayOfWeek' => 1, 'showDropdown' => 1, 'calendarLanguage' => 'en', 'calendarData' => null, 'currentTimestamp' => mktime(0, 0, 0, date('n') , 15, date('Y')),'calendarLegend' => false, 'calendarID' => false, 'formID' => false, 'showDateEditor' => false, 'showLegend' => false, 'calendarSelection' => '', 'calendarHistory' => 1);
    
     
     foreach($default_options as $key => $value){
@@ -25,9 +25,9 @@ function wpbs_calendar($options = array()){
     }
           
    
-    $calendarTimestamp = mktime(0, 0, 0, gmdate('n',$currentTimestamp), 1, gmdate('Y',$currentTimestamp));    
-    $displayMonth = gmdate('n', $calendarTimestamp);
-    $displayYear = gmdate('Y', $calendarTimestamp);
+    $calendarTimestamp = mktime(0, 0, 0, date('n',$currentTimestamp), 1, date('Y',$currentTimestamp));    
+    $displayMonth = date('n', $calendarTimestamp);
+    $displayYear = date('Y', $calendarTimestamp);
     $output .= showCalendar(array('monthToShow' => $displayMonth, 'yearToShow' => $displayYear, 'currentCalendar' => 1, 'totalCalendars' => $totalCalendars , 'firstDayOfWeek' => ($firstDayOfWeek == 7) ? 0 : $firstDayOfWeek, 'calendarLanguage' => ($showDateEditor) ? wpbs_get_admin_language() : $calendarLanguage , 'showDropdown' => $showDropdown, 'calendarData' => $calendarData, 'calendarID' => $calendarID, 'calendarLegend' => $calendarLegend, 'calendarSelection' => $calendarSelection, 'calendarHistory' => $calendarHistory));
 
     
@@ -137,7 +137,7 @@ function showCalendar($options = array())
         if($showDropdown == true){
             $output .= '<div class="wpbs-select-container"><select class="wpbs-dropdown">';
                 for($d=0;$d<12;$d++){
-                    $output .= '<option value="' . mktime(0, 0, 0, $monthToShow + $d, 15, $yearToShow) . '">' . wpbsMonth(gmdate('F',mktime(0, 0, 0, $monthToShow + $d, 15, $yearToShow)), $calendarLanguage) . " " . gmdate('Y',mktime(0, 0, 0, $monthToShow + $d, 15, $yearToShow)) . '</option>';
+                    $output .= '<option value="' . mktime(0, 0, 0, $monthToShow + $d, 15, $yearToShow) . '">' . wpbsMonth(date('F',mktime(0, 0, 0, $monthToShow + $d, 15, $yearToShow)), $calendarLanguage) . " " . date('Y',mktime(0, 0, 0, $monthToShow + $d, 15, $yearToShow)) . '</option>';
                 }
             $output .= '</select></div>';
         } else {

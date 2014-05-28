@@ -12,7 +12,7 @@ class wpbs_widget extends WP_Widget {
         echo $args['before_widget'];        
         
         echo '<div class="wpbs-widget">';       
-        echo do_shortcode('[wpbs id="'.$instance['wpbs_select_calendar'].'" form="'.$instance['wpbs_select_form'].'" title="'.$instance['wpbs_show_title'].'" legend="'.$instance['wpbs_show_legend'].'" language="'.$instance['wpbs_calendar_language'].']');
+        echo do_shortcode('[wpbs id="'.$instance['wpbs_select_calendar'].'" form="'.$instance['wpbs_select_form'].'" title="'.$instance['wpbs_show_title'].'" legend="'.$instance['wpbs_show_legend'].'" language="'.$instance['wpbs_calendar_language'].'"]');
         echo '</div>';
         
         echo $args['after_widget'];

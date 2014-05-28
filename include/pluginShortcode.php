@@ -17,8 +17,8 @@ function wpbs_shortcode( $atts ) {
     if($id == null) return "WP Booking System: ID parameter missing.";
     if($form == null) return "WP Booking System: Form ID parameter missing.";
     
-    if(!in_array($month,array(1,2,3,4,5,6,7,8,9,10,11,12))) {$month = gmdate('m');}
-    if(intval($year) < 1970 || intval($year) > 2100) { $year = gmdate("Y");}
+    if(!in_array($month,array(1,2,3,4,5,6,7,8,9,10,11,12))) {$month = date('m');}
+    if(intval($year) < 1970 || intval($year) > 2100) { $year = date("Y");}
     
     if(!in_array($title,array('yes','no'))) $title = 'no';
     if(!in_array($legend,array('yes','no'))) $legend = 'no';

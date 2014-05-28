@@ -25,6 +25,7 @@ function wpbs_add_form_button(){
                 .wp-core-ui a.wpbs_media_link{
                  padding-left: 0.4em;
                 }
+                #TB_ajaxContent {width: 640px !important; height: 420px !important;}
              </style>
               <a href="#TB_inline?width=480&inlineId=wpbs_add_calendar" class="thickbox button wpbs_media_link" id="add_wpbs" title="' . __("Add Calendar", 'wpbs') . '"><span class="wpbs_media_icon "></span> ' . __("Add Calendar", "wpbs") . '</a>';
     }
