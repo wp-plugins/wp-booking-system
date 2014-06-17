@@ -3,7 +3,7 @@
  * Plugin Name: WP Booking System
  * Plugin URI:  http://www.wpbookingsystem.com
  * Description: WP Booking System.
- * Version:     0.7
+ * Version:     1.0
  * Author:      WP Booking System
  * Author URI:  http://www.wpbookingsystem.com
  *
