@@ -13,6 +13,26 @@ WP Booking System is a simple booking system for WordPress. You will be up and r
 
 Download the Premium version at: http://www.wpbookingsystem.com
 
+Features of the Free version:
+
+* Create your own booking system: a booking calendar and a booking form!
+* Receive and manage bookings
+* Save extra booking information
+* Generate a shortcode to insert the booking calendar anf booking form into a page or post
+* WP Booking System Widget
+* Supports multiple languages
+
+Extra features of the Premium version:
+
+* Create an unlimited number of booking calendars
+* Create an unlimited number of booking forms
+* Display multiple months
+* Create your own legend: apply your own colors and text
+* Change the first day of the week
+* Change the start month / year
+* Edit multiple dates with just one click
+* Very easy to translate into any language
+* Download the Premium version at: http://www.wpbookingsystem.com
 
 == Installation ==
 
