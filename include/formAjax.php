@@ -72,7 +72,7 @@ function wpbs_submitForm_callback() {
         $to = $formOptions['sendTo'];
         $subject = "New booking";
         $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         $headers .= 'From: '.get_option('blogname').' <'.get_option('admin_email').'>' . "\r\n";
         
         $message  = 'A new booking is made via your website!';
