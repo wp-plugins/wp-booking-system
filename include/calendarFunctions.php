@@ -1,4 +1,22 @@
 <?php
+function wpbs_replaceCustom($str){
+    return stripslashes(str_replace( 
+        array(
+            '--AMP--',
+            '--DOUBLEQUOTE--',
+            '--QUOTE--',
+            '--LT--',
+            '--GT--'
+        ),
+        array(
+            '&',
+            '"',
+            "'",
+            '<',
+            '>'
+        ),
+        $str ));
+}
 function wpbs_print_legend_css($legend, $calendarID = null, $hoverCSS = true){
     $output = "<style>";
     foreach(json_decode($legend,true) as $key => $value ){

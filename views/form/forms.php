@@ -35,7 +35,7 @@
             <tr<?php if($i++%2==0):?> class="alternate"<?php endif;?>>
                 <td class="wpbs-table-id">#<?php echo $form['formID']; ?></td>
                 <td class="post-title page-title column-title">
-                    <strong><a class="row-title" href="<?php echo admin_url( 'admin.php?page=wp-booking-system-forms&do=edit-form&id=' . $form['formID']);?>"><?php echo $form['formTitle']; ?></a></strong>
+                    <strong><a class="row-title" href="<?php echo admin_url( 'admin.php?page=wp-booking-system-forms&do=edit-form&id=' . $form['formID']);?>"><?php echo stripslashes($form['formTitle']); ?></a></strong>
                     <div class="row-actions">
                         <span class="edit"><a href="<?php echo admin_url( 'admin.php?page=wp-booking-system-forms&do=edit-form&id=' . $form['formID']);?>" title="Edit this item">Edit</a> | </span>
                         <span class="trash"><a onclick="return confirm('Are you sure you want to delete this form?');" class="submitdelete" href="<?php echo admin_url( 'admin.php?page=wp-booking-system-forms&do=delete-form&id=' . $form['formID'] . '&noheader=true');?>">Delete</a></span>

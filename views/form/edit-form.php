@@ -15,10 +15,10 @@
             
             <form action="<?php echo admin_url( 'admin.php?page=wp-booking-system-forms&do=save-form&noheader=true');?>" method="post">
             <div class="wpbs-buttons-wrapper">
-                <input type="submit" class="button button-primary button-h2 saveCalendar" value="Save Changes" /> 
+                <input type="submit" class="button button-primary button-h2 saveCalendar" value="<?php echo __("Save Changes",'wpbs') ;?>" /> 
                 <a class="button secondary-button button-h2 button-h2-back-margin" href="<?php echo admin_url( 'admin.php?page=wp-booking-system-forms' );?>">Back</a>
             </div>
-            <input type="text" name="formTitle" class="fullTitle" id="formTitle" placeholder="Form title" value="<?php echo (!empty($form['formTitle'])) ? $form['formTitle'] : "" ;?>"/>
+            <input type="text" name="formTitle" class="fullTitle" id="formTitle" placeholder="<?php echo __("Form title",'wpbs') ;?>" value="<?php echo esc_html(stripslashes(((!empty($form['formTitle'])) ? $form['formTitle'] : ""))) ;?>"/>
             
                 
             

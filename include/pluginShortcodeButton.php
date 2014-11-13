@@ -129,7 +129,7 @@ function wpbs_add_mce_popup(){
                     <strong>Form</strong><br />
                     <select id="wpbs_form_id" style="width: 160px;">                                        
                         <?php foreach($forms as $form):?>
-                            <option value="<?php echo absint($form['formID']) ?>"><?php echo esc_html($form['formTitle']) ?></option>
+                            <option value="<?php echo absint($form['formID']) ?>"><?php echo esc_html(stripslashes($form['formTitle'])) ?></option>
                         <?php endforeach; ?>
                     </select> <br/>
                     

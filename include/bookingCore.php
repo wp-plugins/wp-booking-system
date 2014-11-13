@@ -63,7 +63,7 @@ function wpbs_display_single_booking($bookingID){
     $booking = $wpdb->get_row( $sql, ARRAY_A );
     $bookingData = json_decode($booking['bookingData'],true);
     $preview = '';
-    foreach($bookingData as $formField => $formValue):
+    if(!empty($bookingData)) foreach($bookingData as $formField => $formValue):
         if(!is_array($formValue) && !empty($formValue))
             $preview .= "<strong>".$formField."</strong>: " . $formValue . " ";
     endforeach;
@@ -72,14 +72,14 @@ function wpbs_display_single_booking($bookingID){
              wpbs_booking_delete_button($bookingID);
    
     echo     '<span class="wpbs-booking-field-date wpbs-booking-open-options wpbs-booking-field-date-padding"><strong>Check In: </strong>'.wpbs_timeFormat($booking['startDate']).'&nbsp;</span><span class="wpbs-booking-field-date wpbs-booking-open-options"><strong>Check Out: </strong>'.wpbs_timeFormat($booking['endDate']).'</span>';
-    echo     '<span class="wpbs-booking-field-preview wpbs-booking-open-options">'.wpbs_html_cut($preview,40).'...</span>';
+    echo     '<span class="wpbs-booking-field-preview wpbs-booking-open-options">'.wpbs_html_cut(wpbs_replaceCustom($preview),40).'...</span>';
     echo     '<span class="wpbs-booking-field-date wpbs-booking-field-date-id wpbs-booking-open-options"><strong>ID</strong>: #'.$booking['bookingID'].'&nbsp;</span>';
     echo     '<div class="wpbs-booking-field-options" style="display:none;">';
-    foreach($bookingData as $formField => $formValue):
+    if(!empty($bookingData)) foreach($bookingData as $formField => $formValue):
         if(!is_array($formValue))
-            echo         '<p><strong>'.$formField.': </strong> <span class="wpbs-booking-field-text-wrap">'.$formValue.'</span></p>';
+            echo         '<p><strong>'.wpbs_replaceCustom($formField).': </strong> <span class="wpbs-booking-field-text-wrap">'.$formValue.'</span></p>';
         else
-            echo         '<p><strong>'.$formField.': </strong> <span class="wpbs-booking-field-text-wrap">'.implode(', ',$formValue).'</span></p>';
+            echo         '<p><strong>'.wpbs_replaceCustom($formField).': </strong> <span class="wpbs-booking-field-text-wrap">'.implode(', ',$formValue).'</span></p>';
     endforeach;
     echo        '<div class="wpbs-booking-line"><!-- --></div>';
                 wpbs_booking_status_button($bookingID);

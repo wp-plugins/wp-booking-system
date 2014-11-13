@@ -8,8 +8,9 @@ function wpbs_submitForm_callback() {
     $formID = $_POST['wpbs-form-id'];
     $sql = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'bs_forms WHERE formID=%d',$formID);
     $form = $wpdb->get_row( $sql, ARRAY_A );
-    if($wpdb->num_rows > 0): 
-        foreach(json_decode($form['formData'],true) as $field):
+    if(count($form) > 0): 
+        $fields = json_decode($form['formData'],true); 
+        if(!empty($fields)) foreach($fields as $field):
             //backup form data in case of error
             if(!empty($_POST['wpbs-field-' . $field['fieldId']]))
                 $error[$field['fieldId']]['value'] = $_POST['wpbs-field-' . $field['fieldId']];
@@ -39,7 +40,7 @@ function wpbs_submitForm_callback() {
         };
         
     else:
-        return 'WP Booking System: Invalid form ID.';
+        return __("WP Booking System: Invalid form ID.",'wpbs');
     endif;
     
     if($submitForm != true){
@@ -49,8 +50,10 @@ function wpbs_submitForm_callback() {
         echo "<p>".$formOptions['confirmationMessage']."</p>";
         echo '<script>wpbs_clear_selection();</script>';
         //prepare form data
-        if($wpdb->num_rows > 0): 
-            foreach(json_decode($form['formData'],true) as $field):
+        $bookingData = null;
+        if(count($form) > 0):  
+            $fields = json_decode($form['formData'],true);
+            if(!empty($fields)) foreach($fields as $field):
                 @$bookingData[$field['fieldName']] = $_POST['wpbs-field-' . $field['fieldId']];
             endforeach;
         endif;
@@ -86,7 +89,7 @@ function wpbs_submitForm_callback() {
         $message .= '<strong>Check-out: </strong>' . wpbs_timeFormat($_POST['wpbs-form-end-date']) . '<br /><br />';
         
         
-        foreach($bookingData as $formField => $formValue){
+        if(!empty($bookingData)) foreach($bookingData as $formField => $formValue){
             if(!is_array($formValue))
                 $message .= '<strong>'.$formField.': </strong> '.$formValue.'<br />';
             else

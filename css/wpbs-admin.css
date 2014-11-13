@@ -119,7 +119,7 @@ body.wp-admin .hasCustomSelect {margin-left:1px;}
 
 .wpbs-wrap li.wpbs-bookable:hover {border:none !important; cursor:default; line-height:30px !important; }
 
-.wpbs-form-field span.wpbs-field-name {cursor:pointer; padding-left:13px; font-weight:bold; width:215px; display:block; float:left;}
+.wpbs-form-field span.wpbs-field-name {cursor:pointer; padding-left:13px; overflow:hidden; max-height:40px; font-weight:bold; width:215px; display:block; float:left;}
 .wpbs-form-field span.wpbs-field-type {cursor:pointer; width:500px; display:block; float:left;}
 
 .wpbs-form-field div.wpbs-field-options {margin:0 10px; border-top:1px solid #cecece; padding:0 3px; clear:both;}
@@ -138,9 +138,9 @@ body.wp-admin .hasCustomSelect {margin-left:1px;}
 .wpbs-bookings-container tr {display:block; width:776px; float:left;}
 .wpbs-booking-field { width:776px; display:block; min-height:40px; border:1px solid #ccc; background-color:#fff; line-height:40px; margin-bottom:10px; position:relative;}
 .wpbs-booking-open-options { cursor:pointer;}
-.wpbs-booking-field  .wpbs-booking-field-date {width:193px; display:block; float:left;}
-.wpbs-booking-field  .wpbs-booking-field-date-padding {width:185px; padding-left:10px;}
-.wpbs-booking-field  .wpbs-booking-field-date-id {width:70px; padding-left:10px;}
+.wpbs-booking-field .wpbs-booking-field-date {width:190px; display:block; float:left;}
+.wpbs-booking-field .wpbs-booking-field-date-padding {width:180px; padding-left:10px;}
+.wpbs-booking-field .wpbs-booking-field-date-id {width:80px; padding-left:10px;}
 .wpbs-booking-field-preview {width:300px; height:40px; overflow:hidden; display:block; float:left;}
 .wpbs-booking-field-preview strong:first-child {padding-left:0px;}
 .wpbs-booking-field-preview strong {padding-left:12px;}

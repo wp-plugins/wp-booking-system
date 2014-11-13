@@ -1,22 +1,4 @@
 <?php
-function wpbs_replaceCustom($str){
-    return str_replace( 
-        array(
-            '--AMP--',
-            '--DOUBLEQUOTE--',
-            '--QUOTE--',
-            '--LT--',
-            '--GT--'
-        ),
-        array(
-            '&',
-            '"',
-            "'",
-            '<',
-            '>'
-        ),
-        $str );
-}
 function wpbs_edit_dates($options){
     
     foreach($options as $key => $value){

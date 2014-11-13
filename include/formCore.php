@@ -6,28 +6,28 @@ function wpbs_display_form_field($field,$language,$error){
     $value = null; if(!empty($error['value'])) $value = $error['value']; 
     
     if(!empty($field['fieldLanguages'][$language])){
-        $fieldName = esc_html($field['fieldLanguages'][$language]);
+        $fieldName = esc_html(wpbs_replaceCustom($field['fieldLanguages'][$language]));
     } else {
-        $fieldName =  esc_html($field['fieldName']);
+        $fieldName =  esc_html(wpbs_replaceCustom($field['fieldName']));
     }
    
     
     
     $output = '<label class="wpbs-form-label';
         $output .= (!empty($error['error'])) ? " wpbs-form-error" : "";
-    $output .= '" for="wpbs-field-'.$field['fieldId'].'">'. $fieldName;
+    $output .='" for="wpbs-field-'.$field['fieldId'].'">'. $fieldName;
         $output .= ($field['fieldRequired'] == 1) ? "*" : "";
     $output .= '</label>';
         
     switch($field['fieldType']){
         case 'text':            
-            $output .= '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html($value).'" />';
+            $output .= '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html(wpbs_replaceCustom($value)).'" />';
             break;
         case 'email':
-            $output .= '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html($value).'" />';
+            $output .= '<input class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'" value="'.esc_html(wpbs_replaceCustom($value)).'" />';
             break;
         case 'textarea':
-            $output .= '<textarea class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'">'.esc_html($value).'</textarea>';
+            $output .= '<textarea class="wpbs-form-field wpbs-form-field-'.$field['fieldType'].'" type="text" name="wpbs-field-'.$field['fieldId'].'" id="wpbs-field-'.$field['fieldId'].'">'.esc_html(wpbs_replaceCustom($value)).'</textarea>';
             break;
         case 'checkbox':
             $options = explode('|',$field['fieldOptions']);
@@ -128,24 +128,31 @@ function wpbs_edit_form($options = array()){
             echo     '<a href="#" class="wpbs-form-move" title="Move"><!-- --></a>';
             echo     '<a href="#" class="wpbs-form-delete" title="Delete"><!-- --></a>';
             
-            echo     '<span class="wpbs-field-name">'.$field['fieldName'].'&nbsp;</span><span class="wpbs-field-type">'.$fieldTypeFancy.'</span>';
+            echo     '<span class="wpbs-field-name">';
+            if(strlen(wpbs_replaceCustom($field['fieldName'])) > 30) {
+                
+                echo substr(wpbs_replaceCustom($field['fieldName']),0,27) . '...' ;
+            } else{
+                echo wpbs_replaceCustom($field['fieldName']);
+            }                
+            echo    '&nbsp;</span><span class="wpbs-field-type">'.$fieldTypeFancy.'</span>';
             
             echo     '<div class="wpbs-field-options" style="display:none;">';
-            echo         '<p><label>Title</label><input type="text" name="fieldName" class="fieldName" value="'.esc_html($field['fieldName']).'"></p>';
-            echo         '<p><label>Type</label><select class="fieldType" name="fieldType">
-                            <option'; if($field["fieldType"] == 'text') echo " selected='selected'";  echo' value="text">Text</option>
-                            <option'; if($field["fieldType"] == 'email') echo " selected='selected'";  echo' value="email">Email</option>
-                            <option'; if($field["fieldType"] == 'textarea') echo " selected='selected'";  echo' value="textarea">Textarea</option>
-                            <option'; if($field["fieldType"] == 'checkbox') echo " selected='selected'";  echo' value="checkbox">Checkboxes</option>
-                            <option'; if($field["fieldType"] == 'radio') echo " selected='selected'";  echo' value="radio">Radio Buttons</option>
-                            <option'; if($field["fieldType"] == 'dropdown') echo " selected='selected'";  echo' value="dropdown">Dropdown</option>
+            echo         '<p><label>'.__("Title",'wpbs').'</label><input type="text" name="fieldName" class="fieldName" value="'.esc_html(wpbs_replaceCustom($field['fieldName'])).'"></p>';
+            echo         '<p><label>'.__("Type",'wpbs').'</label><select class="fieldType" name="fieldType">
+                            <option'; if($field["fieldType"] == 'text') echo " selected='selected'";  echo' value="text">'.__("Text",'wpbs').'</option>
+                            <option'; if($field["fieldType"] == 'email') echo " selected='selected'";  echo' value="email">'.__("Email",'wpbs').'</option>
+                            <option'; if($field["fieldType"] == 'textarea') echo " selected='selected'";  echo' value="textarea">'.__("Textarea",'wpbs').'</option>
+                            <option'; if($field["fieldType"] == 'checkbox') echo " selected='selected'";  echo' value="checkbox">'.__("Checkboxes",'wpbs').'</option>
+                            <option'; if($field["fieldType"] == 'radio') echo " selected='selected'";  echo' value="radio">'.__("Radio Buttons",'wpbs').'</option>
+                            <option'; if($field["fieldType"] == 'dropdown') echo " selected='selected'";  echo' value="dropdown">'.__("Dropdown",'wpbs').'</option>
                          </select></p>';
             
-            echo         '<p style="'; if(!($field["fieldType"] == 'dropdown' || $field["fieldType"] == 'radio' || $field["fieldType"] == 'checkbox')) echo "display:none";  echo'" class="fieldOptionsContainer"><label>Options</label><input type="text" value="'.esc_html($field['fieldOptions']).'" name="fieldOptions" class="fieldOptions"><small><em>Separate values with an | (eg. Option 1|Option 2|Option 3)</em></small></p>';
-            echo         '<p><label>Required</label><input'; if($field["fieldRequired"] == 'true') echo " checked='checked'";  echo' type="checkbox" name="fieldRequired" class="fieldRequired"></p>';
+            echo         '<p style="'; if(!($field["fieldType"] == 'dropdown' || $field["fieldType"] == 'radio' || $field["fieldType"] == 'checkbox')) echo "display:none";  echo'" class="fieldOptionsContainer"><label>'.__("Options",'wpbs').'</label><input type="text" value="'.esc_html(wpbs_replaceCustom($field['fieldOptions'])).'" name="fieldOptions" class="fieldOptions"><small><em>Separate values with an | (eg. Option 1|Option 2|Option 3)</em></small></p>';
+            echo         '<p><label>'.__("Required",'wpbs').'</label><input'; if($field["fieldRequired"] == 'true') echo " checked='checked'";  echo' type="checkbox" name="fieldRequired" class="fieldRequired"></p>';
             echo         '<div class="wpbs-form-line"><!-- --></div>';
             foreach ($activeLanguages as $code => $language) {
-            echo         '<p><label>'.$language.'</label><input type="text" name="'.$code.'" value="'.esc_html($field["fieldLanguages"][$code]).'" class="languageField languageField-'.$code.'"></p>';
+            echo         '<p><label>'.$language.'</label><input type="text" name="'.$code.'" value="'.esc_html(wpbs_replaceCustom($field["fieldLanguages"][$code])).'" class="languageField languageField-'.$code.'"></p>';
             }
             echo     '</div>';
             echo '</div>';

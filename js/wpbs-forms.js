@@ -68,7 +68,7 @@ wpbs(document).ready(function(){
         wpbs(this).parent().parent().parent().find('span.wpbs-field-name').html($val);        
         formJson = wpbs_form_getJson();
         fieldId = wpbs(this).parent().parent().parent().attr('data-order');
-        formJson[fieldId]['fieldName'] = wpbs(this).val();
+        formJson[fieldId]['fieldName'] = wpbs_htmlEscape(wpbs(this).val());
         wpbs_form_saveJson(formJson);
     })
     
@@ -76,7 +76,7 @@ wpbs(document).ready(function(){
         e.preventDefault();   
         formJson = wpbs_form_getJson();
         fieldId = wpbs(this).parent().parent().parent().attr('data-order');
-        formJson[fieldId]['fieldOptions'] = wpbs(this).val();
+        formJson[fieldId]['fieldOptions'] = wpbs_htmlEscape(wpbs(this).val());
         wpbs_form_saveJson(formJson);
     })
     
@@ -85,7 +85,7 @@ wpbs(document).ready(function(){
    
         formJson = wpbs_form_getJson();
         fieldId = wpbs(this).parent().parent().parent().attr('data-order');
-        formJson[fieldId]['fieldLanguages'][wpbs(this).attr('name')] = wpbs(this).val();
+        formJson[fieldId]['fieldLanguages'][wpbs(this).attr('name')] = wpbs_htmlEscape(wpbs(this).val());
         wpbs_form_saveJson(formJson);
     })
     
