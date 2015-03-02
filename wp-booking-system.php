@@ -3,11 +3,11 @@
  * Plugin Name: WP Booking System
  * Plugin URI:  http://www.wpbookingsystem.com
  * Description: WP Booking System.
- * Version:     1.2
+ * Version:     1.2.1
  * Author:      WP Booking System
  * Author URI:  http://www.wpbookingsystem.com
  *
- * Copyright (c) 2014 WP Booking System
+ * Copyright (c) 2015 WP Booking System
  */
 include 'include/createTables.php';
 register_activation_hook( __FILE__, 'wpbs_install' );
