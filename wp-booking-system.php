@@ -3,7 +3,7 @@
  * Plugin Name: WP Booking System
  * Plugin URI:  http://www.wpbookingsystem.com
  * Description: WP Booking System.
- * Version:     1.2.1
+ * Version:     1.2.2
  * Author:      WP Booking System
  * Author URI:  http://www.wpbookingsystem.com
  *
@@ -123,7 +123,7 @@ add_action('wp_before_admin_bar_render', 'wpbs_admin_bar_notifications',1);
 
 function wpbs_admin_bar_notifications($wp_admin_bar){
     global $wp_admin_bar, $wpdb;
-    
+    if(!current_user_can('read_private_pages')) return false;
     $sql = 'SELECT bookingRead FROM ' . $wpdb->prefix . 'bs_bookings WHERE bookingRead = 0';
     $rows = $wpdb->get_results( $sql, ARRAY_A );
     $count = $wpdb->num_rows;
