@@ -1,7 +1,7 @@
 <?php
 class wpbs_widget extends WP_Widget {
     function wpbs_widget() {
-        parent::WP_Widget(false, $name = 'WP Booking System', array(
+        parent::__construct(false, $name = 'WP Booking System', array(
             'description' => 'WP Booking System Widget'
         ));
     }

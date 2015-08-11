@@ -79,7 +79,7 @@
                 <li>Display a tooltip with info</li>
                 <li>Hide bookings from the past</li>
                 <li>Show the week's number</li>
-                <li>Auto-Pending</li>
+                <li>Automatically block booked days</li>
                 <li>User management</li>
                 <li>Very easy to translate</li>
             </ul>

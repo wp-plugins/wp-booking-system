@@ -19,13 +19,17 @@
             <ul>
                 <li>Create unlimited calendars</li>
                 <li>Create unlimited forms</li>
-                <li>Display two months</li>
+                <li>Display multiple months</li>
                 <li>Create your own legend</li>                
                 <li>Change the first day of the week</li>
                 <li>Change the start month &amp; year</li>
                 <li>Edit multiple dates with one click</li>
-                <li>Save booking information</li>
-                <li>Very easy to translate</li>
+                <li>Display a tooltip with info</li>
+                <li>Hide bookings from the past</li>
+				<li>Show the week's number</li>
+				<li>Automatically block booked days</li>
+				<li>User management</li>
+				<li>Very easy to translate</li>
             </ul>
             <div class="price">
                 <p><strong>&dollar;34</strong> one time payment</p>
