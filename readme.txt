@@ -117,6 +117,9 @@ Please see http://www.wpbookingsystem.com for more information and ask your ques
 
 == Upgrade Notice ==
 
+= 1.2.3 =
+* Small tweak to support PHP 7
+
 = 1.2.2 =
 * Hide notifications in the toolbar when the user does not have access to the corresponding page
 
